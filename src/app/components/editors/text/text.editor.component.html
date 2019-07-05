@@ -1,0 +1,15 @@
+
+<mat-form-field 
+    appearance="outline" 
+    floatLabel="always" 
+    class="w-100-p"
+    [formGroup]="formGroup"
+>
+    <mat-label>{{label}}</mat-label>
+    <input 
+        matInput 
+        placeholder="{{placeholder}}"
+        name="{{name}}"
+        formControlName="{{name}}"
+    />
+</mat-form-field>

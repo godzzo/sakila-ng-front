@@ -1,0 +1,55 @@
+{
+    "name": "actor",
+    "table": {
+        "icon": "shopping_basket",
+        "caption": "Színészek",
+        "columns": [
+            {"name": "id", "caption": "Azonosító", "type": "number"},
+            {"name": "firstName", "caption": "Előnév", "type": "string"},
+            {"name": "lastName", "caption": "Utónév", "type": "string"},
+            {"name": "lastUpdate", "caption": "Mikor módosult", "type": "date"}
+        ]
+    },
+    "form": {
+        "tabs": [
+            {
+                "title": "Basic things",
+                "controls": [
+                    {
+                        "name": "id",
+                        "placeholder": "Give some identifier :)",
+                        "label": "ID",
+                        "type": "text",
+                        "result": "text"
+                    },
+                    {
+                        "name": "lastUpdate",
+                        "placeholder": "Last Update",
+                        "label": "Last Update",
+                        "type": "date",
+                        "result": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Names",
+                "controls": [
+                    {
+                        "name": "firstName",
+                        "placeholder": "First Name",
+                        "label": "First Name",
+                        "type": "text",
+                        "result": "text"
+                    },
+                    {
+                        "name": "lastName",
+                        "placeholder": "Last Name",
+                        "label": "Last Name",
+                        "type": "text",
+                        "result": "text"
+                    }
+                ]
+            }
+        ]
+    }
+}

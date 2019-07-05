@@ -1,0 +1,84 @@
+{
+    "name": "customer",
+    "table": {
+        "icon": "shopping_basket",
+        "caption": "Vásárlók",
+        "columns": [
+            {"name": "id", "caption": "Kód", "type": "number"},
+            {"name": "storeId", "caption": "Raktár Az.", "type": "number"},
+            {"name": "firstName", "caption": "Előnév", "type": "string"},
+            {"name": "lastName", "caption": "Utónév", "type": "string"},
+            {"name": "email", "caption": "e-Mail", "type": "string"},
+            {"name": "active", "caption": "Aktív", "type": "string"}
+        ]
+    },
+    "form": {
+        "tabs": [
+            {
+                "title": "Alap adatok",
+                "controls": [
+                    {
+                        "name": "id",
+                        "placeholder": "Give some identifier :)",
+                        "label": "ID",
+                        "type": "text"
+                    },
+                    {
+                        "name": "storeId",
+                        "placeholder": "Give some identifier :)",
+                        "label": "Raktár",
+                        "type": "text"
+                    },
+                    {
+                        "name": "firstName",
+                        "placeholder": "First Name",
+                        "label": "First Name",
+                        "type": "text"
+                    },
+                    {
+                        "name": "lastName",
+                        "placeholder": "Last Name",
+                        "label": "Last Name",
+                        "type": "text"
+                    },
+                    {
+                        "name": "email",
+                        "placeholder": "e-Mail",
+                        "label": "e-Mail",
+                        "type": "text"
+                    }
+
+                ]
+            },
+            {
+                "title": "Rendszer",
+                "controls": [
+                    {
+                        "name": "active",
+                        "placeholder": "Aktív",
+                        "label": "Aktív",
+                        "type": "text"
+                    },
+                    {
+                        "name": "addressId",
+                        "placeholder": "Cím azon.",
+                        "label": "Cím azon.",
+                        "type": "text"
+                    },
+                    {
+                        "name": "createDate",
+                        "placeholder": "Készült",
+                        "label": "Készült",
+                        "type": "date"
+                    },
+                    {
+                        "name": "lastUpdate",
+                        "placeholder": "Módosult",
+                        "label": "Módosult",
+                        "type": "date"
+                    }
+                ]
+            }
+        ]
+    }
+}

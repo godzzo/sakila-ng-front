@@ -1,0 +1,37 @@
+<mat-table 
+    class="table-tag" 
+    #table 
+    [dataSource]="data" 
+    matSort matSortActive="id" matSortDirection="desc"
+    [@animateStagger]="{value:'50'}" 
+    fusePerfectScrollbar
+>
+
+    <ng-container *ngFor="let col of columns;" [matColumnDef]="col.name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+                {{ col.caption }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <p class="text-truncate">
+                {{ row[col.name] }}
+            </p>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+    <mat-row 
+        *matRowDef="let row; columns: displayedColumns;" 
+        class="row-tag" 
+        matRipple
+        [routerLink]="appRoot+entityName+'/form/'+row.id+'/modify'">
+    </mat-row>
+</mat-table>
+
+<mat-paginator 
+    [length]="totalCount"
+    [pageIndex]="0" 
+    [pageSize]="5" 
+    [pageSizeOptions]="[5, 10, 25, 100]"
+>
+</mat-paginator>

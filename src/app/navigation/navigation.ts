@@ -7,16 +7,25 @@ export const navigation: FuseNavigation[] = [
         type     : 'group',
         children : [
             {
-                id       : 'sample',
-                title    : 'Sample',
-                type     : 'item',
-                icon     : 'email',
-                url      : '/sample',
-                badge    : {
-                    title    : '25',
-                    bg       : '#F44336',
-                    fg       : '#FFFFFF'
-                }
+                id        : 'actorTable',
+                title     : 'Actors',
+                type      : 'item',
+                url       : '/actor/table',
+                exactMatch: true
+            },
+            {
+                id        : 'customerTable',
+                title     : 'Customers',
+                type      : 'item',
+                url       : '/customer/table',
+                exactMatch: true
+            },
+            {
+                id        : 'storeTable',
+                title     : 'Stores',
+                type      : 'item',
+                url       : '/store/table',
+                exactMatch: true
             }
         ]
     }

@@ -1,0 +1,68 @@
+<div class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" 
+                    [routerLink]="backUrl"
+                >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div fxLayout="column" fxLayoutAlign="start start"
+                     [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="h2" *ngIf="pageType ==='edit'">
+                        #{{record.id}}
+                    </div>
+                    <div class="h2" *ngIf="pageType ==='new'">
+                        Új létrehozása
+                    </div>
+                    <div class="subtitle secondary-text">
+                        <span>rekord módosítása</span>
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <button mat-raised-button
+                    [disabled]="formGroup.invalid"
+                    *ngIf="pageType ==='new'" (click)="addRecord()">
+                <span>LÉTREHOZÁS</span>
+            </button>
+
+            <button mat-raised-button
+                    [disabled]="formGroup.invalid || formGroup.pristine"
+                    *ngIf="pageType ==='edit'" (click)="saveRecord()">
+                <span>MENTÉS</span>
+            </button>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+
+                <base-editor-form [formGroup]="formGroup" [config]="config"></base-editor-form>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

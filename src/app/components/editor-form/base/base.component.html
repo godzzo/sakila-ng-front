@@ -1,0 +1,50 @@
+<form name="mainForm" 
+[formGroup]="formGroup" 
+class="w-100-p" 
+fxLayout="column" fxFlex
+>
+
+<mat-tab-group>
+
+    <mat-tab *ngFor="let tab of config.tabs" label="{{tab.title}}">
+
+        <div class="tab-content p-24" fusePerfectScrollbar>
+
+            <ng-container *ngFor="let control of tab.controls">
+
+                <ng-container [ngSwitch]="control.type">
+                
+                    <text-editor
+                        *ngSwitchCase="'text'"
+                        name="{{control.name}}"
+                        label="{{control.label}}"
+                        placeholder="{{control.placeholder}}"
+                        [formGroup]="formGroup"
+                    ></text-editor>
+
+                    <date-editor
+                        *ngSwitchCase="'date'"
+                        name="{{control.name}}"
+                        label="{{control.label}}"
+                        placeholder="{{control.placeholder}}"
+                        [formGroup]="formGroup"
+                    ></date-editor>
+
+                    <simple-mat-table
+                        *ngSwitchCase="'table'"
+                        [displayedColumns]="control.displayedColumns"
+                        [columns]="control.columns"
+                        [entityName]="control.name"
+                    ></simple-mat-table>
+
+                </ng-container>
+
+            </ng-container>
+
+        </div>
+
+    </mat-tab>
+
+</mat-tab-group>
+
+</form>

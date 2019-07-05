@@ -1,0 +1,43 @@
+{
+    "name": "store",
+    "table": {
+        "icon": "shopping_basket",
+        "caption": "Boltok",
+        "columns": [
+            {"name": "id", "caption": "Azonosító", "type": "number"}
+        ]
+    },
+    "form": {
+        "tabs": [
+            {
+                "title": "Alap",
+                "controls": [
+                    {
+                        "name": "id",
+                        "placeholder": "Give some identifier :)",
+                        "label": "ID",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Vásárlók",
+                "controls": [
+                    {
+                        "name": "customer",
+                        "join": "storeId",
+                        "type": "table",
+                        "mode": "simple",
+                        "columns": [
+                            {"name": "id", "caption": "Kód", "type": "number"},
+                            {"name": "firstName", "caption": "Előnév", "type": "string"},
+                            {"name": "lastName", "caption": "Utónév", "type": "string"},
+                            {"name": "email", "caption": "e-Mail", "type": "string"},
+                            {"name": "active", "caption": "Aktív", "type": "string"}
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
