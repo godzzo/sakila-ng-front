@@ -52,7 +52,7 @@ export class DataService implements Resolve<any>
                         map(resp => {
                             console.log('resolve >> getRecord', resp);
 
-                            context.record = resp[0];
+                            context.record = resp;
 
                             return context;
                         })
@@ -90,7 +90,9 @@ export class DataService implements Resolve<any>
 
             return of(false);
         } else {
-            const request$ = this._httpService.get(this.getUrlRoot(context.name) + '/get/' + this.routeParams.id);
+            const request$ = this._httpService.get(
+                this.getUrlRoot(context.name) + '/' + this.routeParams.id
+            );
 
             request$.pipe(map(response => {
                 this.onChanged.next(response[0]);
