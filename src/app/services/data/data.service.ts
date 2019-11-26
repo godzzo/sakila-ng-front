@@ -103,13 +103,16 @@ export class DataService implements Resolve<any>
     }
 
     saveRecord(context, record): Observable<any> {
-        return this._httpService.patch(this.getUrlRoot(context.name), record).pipe(map(resp => {
-            this.onChanged.next({resp, record});
+        return this._httpService.patch(this.getUrlRoot(context.name) + '/' + record.id, record)
+        .pipe(
+            map(resp => {
+                this.onChanged.next({resp, record});
 
-            this._notificationService.notify({action: 'data.saveRecord', data: record, context});
+                this._notificationService.notify({action: 'data.saveRecord', data: record, context});
 
-            return resp;
-        }));
+                return resp;
+            })
+        );
     }
 
     addRecord(context, record): Observable<any> {

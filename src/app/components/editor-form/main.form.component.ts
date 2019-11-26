@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 
@@ -40,6 +40,7 @@ export class MainFormViewComponent implements OnInit, OnDestroy
         private dataService: DataService,
         private _formBuilder: FormBuilder,
         private _location: Location,
+        private _router: Router,
         private activatedRoute: ActivatedRoute
     )
     {
@@ -110,11 +111,14 @@ export class MainFormViewComponent implements OnInit, OnDestroy
         const data = this.formGroup.getRawValue();
 
         this.dataService.addRecord(this.context, data).subscribe(resp => {
-            const url = this.appRoot + this.structureName + '/form/' + resp.identifiers[0].id + '/modify';
+            console.log('Main Form - addRecord - response', resp);
+
+            const url = this.appRoot + this.structureName + '/form/' + resp.id + '/modify';
 
             console.log('Navigate to', {url, data, record: this.record});
 
-            this._location.go(url);
+            // this._location.go(url);
+            this._router.navigate([url]);
         });
     }
 }
