@@ -54,7 +54,12 @@
             <!-- CONTENT -->
             <div class="content">
 
-                <base-editor-form [formGroup]="formGroup" [config]="config"></base-editor-form>
+                <base-editor-form 
+                    [formGroup]="formGroup" 
+                    [config]="config"
+                    [entityName]="entityName"
+                    [record]="record"
+                ></base-editor-form>
 
             </div>
             <!-- / CONTENT -->

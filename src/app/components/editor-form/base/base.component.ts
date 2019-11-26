@@ -7,11 +7,10 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./base.component.scss']
 })
 export class BaseEditorFormComponent implements OnInit {
-    @Input()
-    public formGroup: FormGroup;
-    
-    @Input()
-    public config: any;
+    @Input() formGroup: FormGroup;
+    @Input() config: any;
+    @Input() record: any;
+    @Input() entityName: string;
 
     constructor() { }
 

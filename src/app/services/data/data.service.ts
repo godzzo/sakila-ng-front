@@ -78,10 +78,16 @@ export class DataService implements Resolve<any>
         return resp._embedded[pluralName];
     }
 
-    getUrlRoot(name: string): string {
+    getUrlRoot(name: string, parentId?: number, parentName?: string): string {
         const pluralName = pluralize.plural(name);
 
-        return `/api/${pluralName}`;
+        if (!parentName) {
+            return `/api/${pluralName}`;
+        } else {
+            const parentPlural = pluralize.plural(parentName);
+
+            return `/api/${parentPlural}/${parentId}/${pluralName}`;
+        }
     }
 
     getRecord(context: any): Observable<any> {
@@ -126,20 +132,23 @@ export class DataService implements Resolve<any>
     }
 
     getRecords(name: string, paginator: {pageIndex: number, pageSize: number}
-        , sort: {active: string, direction: string}): Observable<any> {
+        , sort: {active: string, direction: string}
+        , parentId?: number, parentName?: string
+        ): Observable<any> {
         
         const skip = paginator.pageIndex * paginator.pageSize;
         const take = paginator.pageSize;
 
         const [requestUrl, options] = this.prepareGetRecordsRequest(
-            name, skip, take, sort.active, sort.direction);
+            name, skip, take, sort.active, sort.direction, parentId, parentName);
 
         console.log(requestUrl);
 
         return this._httpService.get(requestUrl);
     }
 
-    prepareGetRecordsRequest(name: string, skip: number, take: number, order: string, orderDirection: string)
+    prepareGetRecordsRequest(name: string, skip: number, take: number, order: string, orderDirection: string
+        , parentId: number, parentName: string)
         : [string, any] {
 
         const page = (skip / take);
@@ -148,7 +157,7 @@ export class DataService implements Resolve<any>
             take, skip, page: (skip / take)
         });
 
-        const requestUrl = this.getUrlRoot(name) 
+        const requestUrl = this.getUrlRoot(name, parentId, parentName) 
             + `?page=${page}&size=${take}&sort=${order},${orderDirection}`;
 
         return [requestUrl, null];

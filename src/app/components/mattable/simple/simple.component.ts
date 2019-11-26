@@ -28,6 +28,8 @@ export class SimpleMatTableComponent implements OnInit, AfterViewInit {
     data: any[];
 
     @Input() entityName: string;
+    @Input() parentName: string;
+    @Input() parentRecord: any;
     @Input() appRoot = '/';
 
     context: any;
@@ -64,7 +66,7 @@ export class SimpleMatTableComponent implements OnInit, AfterViewInit {
                 map(data => {
                     console.log(`BaseMatTableComponent >> map : ${typeof (data)}`, data);
 
-                    return data.items;
+                    return this.dataService.getItems(this.entityName, data);
                 }),
                 catchError((err) => {
                     console.log(err);
@@ -81,6 +83,8 @@ export class SimpleMatTableComponent implements OnInit, AfterViewInit {
     }
 
     getData(): Observable<any> {
-        return this.dataService.getRecords(this.entityName, {pageIndex: 0, pageSize: 100}, this.sort);
+        return this.dataService.getRecords(
+            this.entityName, {pageIndex: 0, pageSize: 100}, this.sort, this.parentRecord.id, this.parentName
+        );
     }
 }

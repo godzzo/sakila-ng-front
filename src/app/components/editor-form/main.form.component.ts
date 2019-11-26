@@ -29,7 +29,7 @@ export class MainFormViewComponent implements OnInit, OnDestroy
     @Input()
     public appRoot = '/';
 
-    public structureName: string;
+    public entityName: string;
     
     config: any;
 
@@ -55,10 +55,10 @@ export class MainFormViewComponent implements OnInit, OnDestroy
             this.config = context.config.form;
             this.pageType = context.mode;
             this.record = context.record;
-            this.structureName = context.name;
+            this.entityName = context.name;
             this.context = context;
 
-            this.backUrl = this.appRoot + this.structureName + '/table';
+            this.backUrl = this.appRoot + this.entityName + '/table';
 
             console.log('backUrl', this.backUrl);
 
@@ -113,7 +113,7 @@ export class MainFormViewComponent implements OnInit, OnDestroy
         this.dataService.addRecord(this.context, data).subscribe(resp => {
             console.log('Main Form - addRecord - response', resp);
 
-            const url = this.appRoot + this.structureName + '/form/' + resp.id + '/modify';
+            const url = this.appRoot + this.entityName + '/form/' + resp.id + '/modify';
 
             console.log('Navigate to', {url, data, record: this.record});
 
