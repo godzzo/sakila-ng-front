@@ -138,8 +138,15 @@ export class DataService implements Resolve<any>
 
     prepareGetRecordsRequest(name: string, skip: number, take: number, order: string, orderDirection: string)
         : [string, any] {
+
+        const page = (skip / take);
+
+        console.log('PAGE DATA', {
+            take, skip, page: (skip / take)
+        });
+
         const requestUrl = this.getUrlRoot(name) 
-            + `?page=0&sort=${order},${orderDirection}`;
+            + `?page=${page}&size=${take}&sort=${order},${orderDirection}`;
 
         return [requestUrl, null];
     }
