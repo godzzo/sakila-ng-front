@@ -88,10 +88,10 @@ export class BaseMatTableComponent implements AfterViewInit {
 
                     // Jön az összes találatnak a száma is amit beállítunk a lapozó részére
                     //  vmiért nem kell BehaviorSubject a lapozónak, nem tudom akkor miért és hogyan értesül róla
-                    this.totalCount = data.count;
+                    this.totalCount = this.dataService.getCount(this.entityName, data);
 
                     // Visszaadjuk a talált elemeket, vagyis a lapon kapott sorokat
-                    return data.items;
+                    return this.dataService.getItems(this.entityName, data);
                 }),
                 catchError((err) => { // Elkapjuk a hibát, hogy ne okozzon gondot mint nem kezelt aszinkron hiba
                     console.log(err);

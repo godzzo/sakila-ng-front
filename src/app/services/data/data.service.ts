@@ -8,6 +8,8 @@ import { ConfigService } from '../config/config.service';
 import { NotificationService } from '../notification/notification.service';
 import { HttpService } from '../http/http.service';
 
+import * as pluralize from "pluralize";
+
 @Injectable({
     providedIn: 'root'
 })
@@ -66,8 +68,20 @@ export class DataService implements Resolve<any>
         );
     }
 
+    getCount(name: string, resp: any): number {
+        return resp.page.totalElements;
+    }
+
+    getItems(name: string, resp: any): any[] {
+        const pluralName = pluralize.plural(name);
+
+        return resp._embedded[pluralName];
+    }
+
     getUrlRoot(name: string): string {
-        return `http://localhost:3000/${name}`;
+        const pluralName = pluralize.plural(name);
+
+        return `/api/${pluralName}`;
     }
 
     getRecord(context: any): Observable<any> {
@@ -87,7 +101,7 @@ export class DataService implements Resolve<any>
     }
 
     saveRecord(context, record): Observable<any> {
-        return this._httpService.post(this.getUrlRoot(context.name) + '/modify', record).pipe(map(resp => {
+        return this._httpService.patch(this.getUrlRoot(context.name), record).pipe(map(resp => {
             this.onChanged.next({resp, record});
 
             this._notificationService.notify({action: 'data.saveRecord', data: record, context});
@@ -97,7 +111,7 @@ export class DataService implements Resolve<any>
     }
 
     addRecord(context, record): Observable<any> {
-        return this._httpService.post(this.getUrlRoot(context.name) + '/create', record).pipe(map(resp => {
+        return this._httpService.post(this.getUrlRoot(context.name), record).pipe(map(resp => {
             this.onChanged.next({resp, record});
 
             this._notificationService.notify({action: 'data.addRecord', data: record, context});
@@ -123,7 +137,7 @@ export class DataService implements Resolve<any>
     prepareGetRecordsRequest(name: string, skip: number, take: number, order: string, orderDirection: string)
         : [string, any] {
         const requestUrl = this.getUrlRoot(name) 
-            + `/findAndCount?skip=${skip}&take=${take}&order=${order}&orderDir=${orderDirection}`;
+            + `?page=0&sort=${order},${orderDirection}`;
 
         return [requestUrl, null];
     }

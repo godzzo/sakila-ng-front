@@ -76,4 +76,35 @@ export class HttpService {
 
         return request$;
     }
+
+    patch(url: string, body: any | null, options?: {
+        headers?: HttpHeaders | {
+            [header: string]: string | string[];
+        };
+        observe?: 'body';
+        params?: HttpParams | {
+            [param: string]: string | string[];
+        };
+        reportProgress?: boolean;
+        responseType?: 'json';
+        withCredentials?: boolean;
+    }): Observable<Object> {
+        const request$ = this._httpClient.patch(url, body, options);
+
+        console.log('HttpService >> patch', {url, body, options});
+
+        request$.pipe(
+            map(resp => resp),
+            catchError(error => {
+                console.log('HttpService >> patch', error); 
+
+                this._notificationService.notify({
+                    action: 'http.patch', url, body, options, error});
+
+                return of([]);
+            })
+        );
+
+        return request$;
+    }    
 }
